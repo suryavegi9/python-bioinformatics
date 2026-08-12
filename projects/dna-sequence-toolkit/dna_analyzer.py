@@ -1,9 +1,59 @@
-# DNA Sequence Analyzer
-# First version: Basic sequence analyzer
-sequence = "ATGCGTGCTCAGCTAGCTAGCTAGCTTGGAACCCTTCCAAGG"
-print("DNA sequence:", sequence)
-print("length of sequence:", len(sequence))
-print("A:", sequence.count("A"))
-print("T:", sequence.count("T"))
-print("G:", sequence.count("G"))
-print("C:", sequence.count("C"))
+ # DNA Sequence Analyzer
+# Version 5: reusable functions for DNA sequence analysis
+
+
+def validate_sequence(sequence):
+    """Check whether a sequence contains only valid DNA bases."""
+    valid_bases = set("ATGC")
+    return len(sequence) > 0 and set(sequence.upper()).issubset(valid_bases)
+
+
+def calculate_length(sequence):
+    """Return the length of a DNA sequence."""
+    return len(sequence)
+
+
+def count_nucleotides(sequence):
+    """Return the count of each DNA nucleotide."""
+    sequence = sequence.upper()
+
+    return {
+        "A": sequence.count("A"),
+        "T": sequence.count("T"),
+        "G": sequence.count("G"),
+        "C": sequence.count("C")
+    }
+
+
+def calculate_gc_content(sequence):
+    """Calculate the GC content of a DNA sequence."""
+    sequence = sequence.upper()
+    if len(sequence) == 0:
+        return 0.0
+
+    gc_count = sequence.count("G") + sequence.count("C")
+
+    return (gc_count / len(sequence)) * 100
+
+
+# Example DNA sequence
+
+sequence ="ATTGGCCTTAGCCGATTGCATGACGTGAC"
+
+if validate_sequence(sequence):
+    print("Sequence is valid DNA.")
+
+    print("DNA Sequence:", sequence)
+    print("Sequence Length:", calculate_length(sequence))
+
+    nucleotide_counts = count_nucleotides(sequence)
+
+    print("A:", nucleotide_counts["A"])
+    print("T:", nucleotide_counts["T"])
+    print("G:", nucleotide_counts["G"])
+    print("C:", nucleotide_counts["C"])
+
+    print("GC Content:", calculate_gc_content(sequence), "%")
+
+else:
+    print("Invalid DNA sequence. Please ensure it contains only A, T, G, and C.")
