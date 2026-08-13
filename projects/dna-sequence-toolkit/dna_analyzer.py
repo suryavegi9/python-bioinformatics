@@ -35,25 +35,42 @@ def calculate_gc_content(sequence):
 
     return (gc_count / len(sequence)) * 100
 
+def find_motif(sequence, motif):
+    """Find all occurrences of a motif in a DNA sequence."""
+    sequence = sequence.upper()
+    motif = motif.upper()
+    positions = []
+    for i in range(len(sequence) - len(motif) + 1):
+        if sequence[i:i + len(motif)] == motif:
+            positions.append(i )
+
+    return positions
+
 
 # Example DNA sequence
+def main():
+    sequence = "ATTGGCCTTAGCCGATTGCATGACGTGAC"
 
-sequence ="ATTGGCCTTAGCCGATTGCATGACGTGAC"
+    if validate_sequence(sequence):
+        print("Sequence is valid DNA.")
 
-if validate_sequence(sequence):
-    print("Sequence is valid DNA.")
+        print("DNA Sequence:", sequence)
+        print("Sequence Length:", calculate_length(sequence))
 
-    print("DNA Sequence:", sequence)
-    print("Sequence Length:", calculate_length(sequence))
+        nucleotide_counts = count_nucleotides(sequence)
 
-    nucleotide_counts = count_nucleotides(sequence)
+        print("A:", nucleotide_counts["A"])
+        print("T:", nucleotide_counts["T"])
+        print("G:", nucleotide_counts["G"])
+        print("C:", nucleotide_counts["C"])
 
-    print("A:", nucleotide_counts["A"])
-    print("T:", nucleotide_counts["T"])
-    print("G:", nucleotide_counts["G"])
-    print("C:", nucleotide_counts["C"])
+        print("GC Content:", calculate_gc_content(sequence), "%")
+        motif = input("Enter a motif to search for: ")
+        positions = find_motif(sequence, motif)
+        print("motif:", motif)
+        print("Motif positions:", positions)
 
-    print("GC Content:", calculate_gc_content(sequence), "%")
-
-else:
-    print("Invalid DNA sequence. Please ensure it contains only A, T, G, and C.")
+    else:
+        print("Invalid DNA sequence. Please ensure it contains only A, T, G, and C.")
+if __name__ == "__main__":
+    main()

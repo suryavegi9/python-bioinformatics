@@ -2,8 +2,10 @@ from dna_analyzer import (
     validate_sequence,
     calculate_length,
     count_nucleotides,
-    calculate_gc_content
-)
+    calculate_gc_content,
+    find_motif )
+
+
 
 
 def test_validate_sequence():
@@ -31,3 +33,9 @@ def test_calculate_gc_content():
     assert calculate_gc_content("GGGGCCCC") == 100.0
     assert calculate_gc_content("AAAAATTTTT") == 0.0
     assert calculate_gc_content("") == 0.0
+
+def test_find_motif():
+    assert find_motif("ATGCATGC", "ATG") == [0, 4]
+    assert find_motif("ATGCATGC", "TGC") == [1, 5]
+    assert find_motif("ATGCATGC", "XYZ") == []
+    
