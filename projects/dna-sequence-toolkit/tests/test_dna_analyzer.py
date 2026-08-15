@@ -3,7 +3,8 @@ from dna_analyzer import (
     calculate_length,
     count_nucleotides,
     calculate_gc_content,
-    find_motif )
+    find_motif,
+    read_fasta,)
 
 
 
@@ -38,4 +39,8 @@ def test_find_motif():
     assert find_motif("ATGCATGC", "ATG") == [0, 4]
     assert find_motif("ATGCATGC", "TGC") == [1, 5]
     assert find_motif("ATGCATGC", "XYZ") == []
-    
+
+def test_read_fasta():
+    header, sequence = read_fasta("data/example.fasta")
+    assert header == "example_sequence"
+    assert sequence ==  "ATGCGCTAGCTGACTGACTAGCTAGCGTACGTACGTAACGTGAC"

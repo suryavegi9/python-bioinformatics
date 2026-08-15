@@ -45,10 +45,29 @@ def find_motif(sequence, motif):
             positions.append(i )
 
     return positions
+def read_fasta(file_path):
+    """Read a FASTA file and return its sequence and header."""
+    header = ""
+    sequence_parts = []
+    with open(file_path, "r") as file:
+        for line in file:
+            line = line.strip()
+            if line.startswith(">"):
+                header = line[1:]  # Remove the '>' character
+            elif line:
+                sequence_parts.append(line)
+
+    sequence = "".join(sequence_parts)
+    return header, sequence
 
 
 # Example DNA sequence
 def main():
+    fasta_file =  "data/example.fasta"
+    header, sequence = read_fasta(fasta_file)
+    print("FASTA Header:", header)
+    print("FASTA Sequence:", sequence)
+
     sequence = "ATTGGCCTTAGCCGATTGCATGACGTGAC"
 
     if validate_sequence(sequence):
