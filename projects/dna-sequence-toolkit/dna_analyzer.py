@@ -65,12 +65,10 @@ def read_fasta(file_path):
 def main():
     fasta_file =  "data/example.fasta"
     header, sequence = read_fasta(fasta_file)
-    print("FASTA Header:", header)
-    print("FASTA Sequence:", sequence)
-
-    sequence = "ATTGGCCTTAGCCGATTGCATGACGTGAC"
-
     if validate_sequence(sequence):
+        print("FASTA Header:", header)
+        print("FASTA Sequence:", sequence)
+
         print("Sequence is valid DNA.")
 
         print("DNA Sequence:", sequence)
